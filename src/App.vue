@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComponent @search="searchApi" />
-    <MainComponent />
+    <MainComponent :films="films" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     return {
       apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "921ca470afccdb8fe8422b187e30bb97",
-      arrayFilm: [],
+      films: [],
     };
   },
   methods: {
@@ -33,7 +33,10 @@ export default {
       axios
         .get(this.apiUrl + "movie", { params })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
+          this.films = response.data.results;
+          console.log(this.films);
+          return this.films;
         })
         .catch((error) => {
           console.log(error);
