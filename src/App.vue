@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderComponent @search="searchApi" />
-    <MainComponent :films="films" />
+    <MainComponent :films="films" :series="series" />
   </div>
 </template>
 
@@ -21,26 +21,41 @@ export default {
       apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "921ca470afccdb8fe8422b187e30bb97",
       films: [],
+      series: [],
     };
   },
   methods: {
     searchApi(userText) {
-      const params = {
-        query: userText,
-        api_key: this.apiKey,
-        language: "it-IT",
-      };
-      axios
-        .get(this.apiUrl + "movie", { params })
-        .then((response) => {
-          // console.log(response);
-          this.films = response.data.results;
-          console.log(this.films);
-          return this.films;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (userText.length > 0) {
+        const params = {
+          query: userText,
+          api_key: this.apiKey,
+          language: "it-IT",
+        };
+        axios // chiamata Api per movies
+          .get(this.apiUrl + "movie", { params })
+          .then((response) => {
+            // console.log(response);
+            this.films = response.data.results;
+            console.log(this.films);
+            return this.films;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+        axios // chiamata Api per series
+          .get(this.apiUrl + "tv", { params })
+          .then((response) => {
+            // console.log(response);
+            this.series = response.data.results;
+            console.log(this.series);
+            return this.series;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
 };
