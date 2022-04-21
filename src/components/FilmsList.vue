@@ -17,7 +17,7 @@
           <span><b>Titolo:</b> {{ film.title }}</span>
           <span><b>Titolo originale:</b> {{ film.original_title }}</span>
           <span><b>Lingua originale:</b> {{ film.original_language }}</span>
-          <span><b>Voto:</b> {{ film.vote_average }}</span>
+          <span><b>Voto:</b> {{ intNumber(film.vote_average) }}</span>
         </div>
       </div>
     </div>
@@ -30,6 +30,11 @@ export default {
   props: {
     films: Array,
     imageUrl: String,
+  },
+  methods: {
+    intNumber(number) {
+      return Math.ceil(number);
+    },
   },
 };
 </script>

@@ -12,11 +12,11 @@
             alt="not-found"
           />
         </div>
-        <div class="card_text">
+        <div class="card_text d-flex flex-column">
           <span><b>Titolo:</b> {{ serie.name }}</span>
           <span><b>Titolo originale:</b> {{ serie.original_name }}</span>
           <span><b>Lingua originale:</b> {{ serie.original_language }}</span>
-          <span><b>Voto:</b> {{ serie.vote_average }}</span>
+          <span><b>Voto:</b> {{ intNumber(serie.vote_average) }}</span>
         </div>
       </div>
     </div>
@@ -29,6 +29,11 @@ export default {
   props: {
     series: Array,
     imageUrl: String,
+  },
+  methods: {
+    intNumber(number) {
+      return Math.ceil(number);
+    },
   },
 };
 </script>
