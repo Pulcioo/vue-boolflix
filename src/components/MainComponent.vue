@@ -1,15 +1,15 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
+      <div class="col p-5">
         <span>FILM</span>
-        <FilmsList :films="films" />
+        <FilmsList :films="films" :imageUrl="imageUrl" />
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col p-5">
         <span>SERIE TV</span>
-        <SeriesList :series="series" />
+        <SeriesList :series="series" :imageUrl="imageUrl" />
       </div>
     </div>
   </div>
@@ -29,8 +29,20 @@ export default {
     films: Array,
     series: Array,
   },
+  data() {
+    return {
+      imageUrl: "https://image.tmdb.org/t/p/w185/",
+    };
+  },
 };
 </script>
 
 <style scoped lang="scss">
+.row {
+  background-color: #333;
+  span {
+    font-size: 25px;
+    color: white;
+  }
+}
 </style>

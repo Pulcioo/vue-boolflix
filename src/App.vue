@@ -38,7 +38,6 @@ export default {
             // console.log(response);
             this.films = response.data.results;
             console.log(this.films);
-            return this.films;
           })
           .catch((error) => {
             console.log(error);
@@ -50,7 +49,6 @@ export default {
             // console.log(response);
             this.series = response.data.results;
             console.log(this.series);
-            return this.series;
           })
           .catch((error) => {
             console.log(error);
