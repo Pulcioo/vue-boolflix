@@ -27,7 +27,14 @@
               />
               <span v-else>{{ film.original_language }}</span>
             </li>
-            <li><b>Voto:</b> {{ intNumber(film.vote_average) }}</li>
+            <li>
+              <b>Voto:</b
+              ><span
+                v-for="(star, index) in intNumber(film.vote_average)"
+                :key="index"
+                ><i class="fa-solid fa-star"></i
+              ></span>
+            </li>
           </ul>
         </div>
       </div>
