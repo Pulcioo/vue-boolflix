@@ -13,10 +13,21 @@
           />
         </div>
         <div class="card_text d-flex flex-column">
-          <span><b>Titolo:</b> {{ serie.name }}</span>
-          <span><b>Titolo originale:</b> {{ serie.original_name }}</span>
-          <span><b>Lingua originale:</b> {{ serie.original_language }}</span>
-          <span><b>Voto:</b> {{ intNumber(serie.vote_average) }}</span>
+          <ul class="list">
+            <li><b>Titolo:</b> {{ serie.title }}</li>
+            <li><b>Titolo originale:</b> {{ serie.original_title }}</li>
+            <li>
+              <b>Lingua originale: </b
+              ><img
+                v-if="avilableFlags.includes(serie.original_language)"
+                :src="`./flags/${serie.original_language}.png`"
+                :alt="serie.original_language"
+                class="flag"
+              />
+              <span v-else>{{ serie.original_language }}</span>
+            </li>
+            <li><b>Voto:</b> {{ intNumber(serie.vote_average) }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -30,9 +41,14 @@ export default {
     series: Array,
     imageUrl: String,
   },
+  data() {
+    return {
+      avilableFlags: ["it", "fr", "es", "en", "de"],
+    };
+  },
   methods: {
     intNumber(number) {
-      return Math.ceil(number);
+      return Math.ceil(number / 2);
     },
   },
 };
@@ -44,6 +60,16 @@ export default {
 
   .card_text {
     font-size: 12px;
+  }
+
+  .list {
+    list-style-type: none;
+    padding-inline-start: 3px;
+    margin-top: 3px;
+
+    .flag {
+      width: 20px;
+    }
   }
 }
 </style>

@@ -14,10 +14,21 @@
           />
         </div>
         <div class="card_text d-flex flex-column">
-          <span><b>Titolo:</b> {{ film.title }}</span>
-          <span><b>Titolo originale:</b> {{ film.original_title }}</span>
-          <span><b>Lingua originale:</b> {{ film.original_language }}</span>
-          <span><b>Voto:</b> {{ intNumber(film.vote_average) }}</span>
+          <ul class="list">
+            <li><b>Titolo:</b> {{ film.title }}</li>
+            <li><b>Titolo originale:</b> {{ film.original_title }}</li>
+            <li>
+              <b>Lingua originale: </b
+              ><img
+                v-if="avilableFlags.includes(film.original_language)"
+                :src="`./flags/${film.original_language}.png`"
+                :alt="film.original_language"
+                class="flag"
+              />
+              <span v-else>{{ film.original_language }}</span>
+            </li>
+            <li><b>Voto:</b> {{ intNumber(film.vote_average) }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -31,9 +42,14 @@ export default {
     films: Array,
     imageUrl: String,
   },
+  data() {
+    return {
+      avilableFlags: ["it", "fr", "es", "en", "de"],
+    };
+  },
   methods: {
     intNumber(number) {
-      return Math.ceil(number);
+      return Math.ceil(number / 2);
     },
   },
 };
@@ -45,6 +61,16 @@ export default {
 
   .card_text {
     font-size: 12px;
+  }
+
+  .list {
+    list-style-type: none;
+    padding-inline-start: 3px;
+    margin-top: 3px;
+
+    .flag {
+      width: 20px;
+    }
   }
 }
 </style>
