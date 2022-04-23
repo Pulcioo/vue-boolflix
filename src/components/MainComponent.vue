@@ -2,13 +2,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col p-5">
-        <span>FILM</span>
+        <span v-show="films.length > 0">FILM</span>
         <FilmsList :films="films" :imageUrl="imageUrl" />
       </div>
     </div>
     <div class="row">
       <div class="col p-5">
-        <span>SERIE TV</span>
+        <span v-show="series.length > 0">SERIE TV</span>
         <SeriesList :series="series" :imageUrl="imageUrl" />
       </div>
     </div>
@@ -31,18 +31,15 @@ export default {
   },
   data() {
     return {
-      imageUrl: "https://image.tmdb.org/t/p/w185/",
+      imageUrl: "https://image.tmdb.org/t/p/w342/",
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
-.row {
-  background-color: #333;
-  span {
-    font-size: 25px;
-    color: white;
-  }
+span {
+  font-size: 25px;
+  color: white;
 }
 </style>
